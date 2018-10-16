@@ -7,5 +7,3 @@ Credits
 Assets-
 
 GameDev.tv by Ben Tristem
-
-Unity Technologies
