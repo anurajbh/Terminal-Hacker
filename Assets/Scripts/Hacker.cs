@@ -5,7 +5,7 @@ public class Hacker : MonoBehaviour
     //Game Configuration Data
     string greeting;
     string[] passw1 = {"file", "edit", "view", "search"};
-    string[] passw2 = { "stellos", "revalon", "tehlos", "s'rofh" };
+    string[] passw2 = { "hamster", "weasel", "mammoth", "dragon" };
     public string passw;
     //Game State
     public int level;
@@ -69,12 +69,46 @@ public class Hacker : MonoBehaviour
     {
         if (input == passw)
         {
-            Terminal.WriteLine("Correct Password. Congrats!");
-            currentScreen = Screen.Win;
+            WinDisplay();
         }
         else
         {
             Terminal.WriteLine("Wrong Password. Try Again!");
+        }
+    }
+
+    void WinDisplay()
+    {
+        currentScreen = Screen.Win;
+        Terminal.ClearScreen();
+        ShowLevelReward();
+    }
+    void ShowLevelReward()
+    {
+        switch (level)
+        {
+            case 1:
+                Terminal.WriteLine("Correct Password. Have a book!");
+                Terminal.WriteLine(@"    
+                    _________
+                   /________//
+                  /________//                         
+                 /________//                                   
+                (________(/
+                                    ");
+                break;
+            case 2:
+                Terminal.WriteLine(@"
+.__   __.  __    ______  _______ 
+|  \ |  | |  |  /      ||   ____|
+|   \|  | |  | |  ,----'|  |__   
+|  . `  | |  | |  |     |   __|  
+|  |\   | |  | |  `----.|  |____ 
+|__| \__| |__|  \______||_______|
+                                  ");
+                break;
+            default:
+                break;
         }
     }
 

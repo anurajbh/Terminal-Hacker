@@ -237,7 +237,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1744407292189834, guid: c46548f7b668a78409fa399c095e4e6b,
     type: 2}
   m_PrefabInternal: {fileID: 647923627}
---- !u!114 &1595534747
+--- !u!114 &1595534746
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -245,6 +245,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1595534745}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2be52a9461b99546b6f0c9bf8b8ef8c, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b7103777de560c4db68d675e0ed62d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  passw: 
+  level: 0
+  currentScreen: 0
