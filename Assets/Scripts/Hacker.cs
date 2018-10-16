@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class FirstScript : MonoBehaviour
+public class Hacker : MonoBehaviour
 {
     //Game Configuration Data
     string greeting;
