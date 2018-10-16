@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
-
 public class Hacker : MonoBehaviour
 {
     //Game Configuration Data
     string greeting;
-    string[] passw1 = {"file", "edit", "view", "search"};
-    string[] passw2 = { "hamster", "weasel", "mammoth", "dragon" };
-    public string passw;
+    string[] passw1 = {"note", "edit", "file", "easy"};
+    string[] passw2 = {"caster", "trivial", "build", "tools" , "sets"};
+    string[] passw3 = { "medium", "control", "ready", "complete", "online" };
+    const string menuHint = "Type menu to go back to the menu";
+    string passw;
     //Game State
     public int level;
     public enum Screen { MainMenu, Password, Win };
@@ -30,22 +31,25 @@ public class Hacker : MonoBehaviour
         Terminal.WriteLine("What would you like to hack into?");
         Terminal.WriteLine("Press 1 for the local library");
         Terminal.WriteLine("Press 2 for the police station");
+        Terminal.WriteLine("Press 3 for NASA");
     }
     void RunMainMenu(string input)
     {
-        bool isValidLevel = (input == "1" || input == "2");
+        bool isValidLevel = (input == "1" || input == "2" || input == "3");
         if(isValidLevel)
         {
             level = int.Parse(input);
-            StartGame();
+            AskForPassword();
         }
         else if (input == "007")
         {
             Terminal.WriteLine("Please select a level Mr Bond!");
+            Terminal.WriteLine(menuHint);
         }
         else
         {
             Terminal.WriteLine("Please choose a valid level");
+            Terminal.WriteLine(menuHint);
         }
     }
     void OnUserInput(string input)
@@ -73,7 +77,7 @@ public class Hacker : MonoBehaviour
         }
         else
         {
-            Terminal.WriteLine("Wrong Password. Try Again!");
+            AskForPassword();
         }
     }
 
@@ -82,56 +86,75 @@ public class Hacker : MonoBehaviour
         currentScreen = Screen.Win;
         Terminal.ClearScreen();
         ShowLevelReward();
+        Terminal.WriteLine(menuHint);
     }
     void ShowLevelReward()
     {
         switch (level)
         {
             case 1:
-                Terminal.WriteLine("Correct Password. Have a book!");
-                Terminal.WriteLine(@"    
-                    _________
-                   /________//
-                  /________//                         
-                 /________//                                   
-                (________(/
-                                    ");
+                Terminal.WriteLine(@"
+  _   _ ___ ____ _____ 
+ | \ | |_ _/ ___| ____|
+ |  \| || | |   |  _|  
+ | |\  || | |___| |___ 
+ |_| \_|___\____|_____|
+                            
+");
                 break;
             case 2:
                 Terminal.WriteLine(@"
-.__   __.  __    ______  _______ 
-|  \ |  | |  |  /      ||   ____|
-|   \|  | |  | |  ,----'|  |__   
-|  . `  | |  | |  |     |   __|  
-|  |\   | |  | |  `----.|  |____ 
-|__| \__| |__|  \______||_______|
-                                  ");
+   ____  ___   ___  ____  
+  / ___|/ _ \ / _ \|  _ \ 
+ | |  _| | | | | | | | | |
+ | |_| | |_| | |_| | |_| |
+  \____|\___/ \___/|____/
+                    
+");
+                break;
+            case 3:
+                Terminal.WriteLine(@"
+   ____ ____  _____    _  _____ 
+  / ___|  _ \| ____|  / \|_   _|
+ | |  _| |_) |  _|   / _ \ | |  
+ | |_| |  _ <| |___ / ___ \| |  
+  \____|_| \_\_____/_/   \_\_|
+                                                                                            
+");
                 break;
             default:
                 break;
         }
     }
 
-    void StartGame()
+    void AskForPassword()
     {
         currentScreen = Screen.Password;
         Terminal.ClearScreen();
         Terminal.WriteLine("You have chosen level " + level);
-        Terminal.WriteLine("Please enter your password: ");
+        SetRandomPassword();
+        Terminal.WriteLine("Enter your password, hint: " + passw.Anagram());
+        Terminal.WriteLine(menuHint);
+    }
+    void SetRandomPassword()
+    {
+        int index;
         switch (level)
         {
             case 1:
-                int index1 = Random.Range(0, passw1.Length);
-                passw = passw1[index1];
+                index = Random.Range(0, passw1.Length);
+                passw = passw1[index];
                 break;
             case 2:
-                int index2 = Random.Range(0, passw2.Length);
-                passw = passw2[index2];
+                index = Random.Range(0, passw2.Length);
+                passw = passw2[index];
+                break;
+            case 3:
+                index = Random.Range(0, passw3.Length);
+                passw = passw3[index];
                 break;
             default:
                 break;
         }
     }
 }
-
-    
