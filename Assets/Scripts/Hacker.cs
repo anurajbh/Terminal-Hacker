@@ -3,15 +3,16 @@ public class Hacker : MonoBehaviour
 {
     //Game Configuration Data
     string greeting;
-    string[] passw1 = {"note", "edit", "file", "easy"};
-    string[] passw2 = {"caster", "trivial", "build", "tools" , "sets"};
-    string[] passw3 = { "medium", "control", "ready", "complete", "online" };
+    string[] passw1 = { "note", "edit", "file", "easy" };//easy passwords
+    string[] passw2 = { "caster", "trivial", "build", "tools", "sets" };//medium passwords
+    string[] passw3 = { "medium", "control", "ready", "complete", "online" };//hard passwords
     const string menuHint = "Type menu to go back to the menu";
     string passw;
     //Game State
     public int level;
     public enum Screen { MainMenu, Password, Win };
     public Screen currentScreen;
+    string close= "Type quit/close/exit to close the game";
     // Use this for initialization
     void Start()
     {
@@ -32,18 +33,24 @@ public class Hacker : MonoBehaviour
         Terminal.WriteLine("Press 1 for the local library");
         Terminal.WriteLine("Press 2 for the police station");
         Terminal.WriteLine("Press 3 for NASA");
+        Terminal.WriteLine(close);
     }
     void RunMainMenu(string input)
     {
         bool isValidLevel = (input == "1" || input == "2" || input == "3");
-        if(isValidLevel)
+        if (isValidLevel)
         {
             level = int.Parse(input);
             AskForPassword();
         }
-        else if (input == "007")
+        else if (input == "007")// Easter Egg
         {
             Terminal.WriteLine("Please select a level Mr Bond!");
+            Terminal.WriteLine(menuHint);
+        }
+        else if (input == "General Kenobi")// Easter Egg
+        {
+            Terminal.WriteLine("You are a bold one");
             Terminal.WriteLine(menuHint);
         }
         else
@@ -67,13 +74,18 @@ public class Hacker : MonoBehaviour
         {
             PasswordCheck(input);
         }
+        else if (input == "exit" || input == "close" || input == "quit")
+        {
+            Terminal.WriteLine("If on the web, close the tab");
+            Application.Quit();
+        }
     }
     //Method to check password string
     void PasswordCheck(string input)
     {
         if (input == passw)
         {
-            WinDisplay();
+            WinDisplay();//setting  game state to win
         }
         else
         {
@@ -87,6 +99,7 @@ public class Hacker : MonoBehaviour
         Terminal.ClearScreen();
         ShowLevelReward();
         Terminal.WriteLine(menuHint);
+        Terminal.WriteLine(close);
     }
     void ShowLevelReward()
     {
@@ -123,6 +136,7 @@ public class Hacker : MonoBehaviour
 ");
                 break;
             default:
+                Debug.Log("Error");
                 break;
         }
     }
@@ -133,8 +147,9 @@ public class Hacker : MonoBehaviour
         Terminal.ClearScreen();
         Terminal.WriteLine("You have chosen level " + level);
         SetRandomPassword();
-        Terminal.WriteLine("Enter your password, hint: " + passw.Anagram());
+        Terminal.WriteLine("Enter your password, hint: " + passw.Anagram());//for password hint
         Terminal.WriteLine(menuHint);
+        Terminal.WriteLine(close);
     }
     void SetRandomPassword()
     {
